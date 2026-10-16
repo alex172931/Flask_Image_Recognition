@@ -1,0 +1,16 @@
+[MAIN]
+# Folders that are not Python source code
+ignore=.venv,test_images,static,templates
+# Fail (non-zero exit code) when the global score is below this value
+fail-under=9.5
+jobs=0
+
+[MESSAGES CONTROL]
+# too-few-public-methods is noise for small test helpers
+disable=too-few-public-methods
+
+[FORMAT]
+max-line-length=100
+
+[DESIGN]
+max-args=6
