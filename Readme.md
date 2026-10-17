@@ -1,5 +1,7 @@
 # Hand Digit Image Recognition
 
+![CI](https://github.com/alex172931/Flask_Image_Recognition/actions/workflows/ci.yml/badge.svg)
+
 This web app is made using Flask framework and is all about predicting the hand sign digit images based on the deep learning model trained using transfer learning.
 
 ![Python](https://img.shields.io/badge/python-8338ec)
@@ -29,31 +31,48 @@ https://user-images.githubusercontent.com/72191416/201943098-c8f5fd8b-ec7d-4e5d-
 Clone the repository in your project directory.
 
 ```commandline
-git clone https://github.com/Sachin-crypto/Flask_Image_Recognition.git
+git clone https://github.com/alex172931/Flask_Image_Recognition.git
 ```
-OR
-
-Download as **[ZIP](https://github.com/Sachin-crypto/Flask_Image_Recognition/archive/refs/heads/main.zip)** file and extract it in your project directory.
 
 # Install Dependencies
 
-Install the dependencies from the **requirements.txt** file.
+The project pins TensorFlow 2.10, which only supports **Python 3.10 or older**.
+If your system has a newer Python, [uv](https://docs.astral.sh/uv/) can create a 3.10 environment for you:
 
 ```commandline
-pip install -r requirements.txt
+uv venv -p 3.10 .venv
+source .venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
 # Run
 
-**cd** into the current directory and run the script.
-
 ```commandline
-flask --app app.py run --debug
+python app.py
 ```
-Click [here](https://geekpython.in/run-flask-app-from-the-command-line-in-windows) to get the detailed guide on running the Flask app from the command line.
+
+Then open http://127.0.0.1:9000 in your browser.
 
 # Test
 
 - Choose an image from the test images folder.
 - You will see a preview of the uploaded image.
 - Click on **Submit** button and see the magic.
+
+# Code Quality and Automated Tests
+
+Install the development tools (Pylint, pre-commit) and enable the git hook:
+
+```commandline
+uv pip install -r requirements-dev.txt
+pre-commit install
+```
+
+Run the checks locally:
+
+```commandline
+pylint $(git ls-files "*.py")
+pytest -v
+```
+
+The same checks run on GitHub Actions on every push and pull request to `main` (see `.github/workflows/ci.yml`).
