@@ -1,11 +1,18 @@
 """Flask web app that predicts the digit shown in a hand sign image."""
 import os
+import secrets
 
 from flask import Flask, render_template, request
+from flask_wtf.csrf import CSRFProtect
 
 from model import preprocess_img, predict_result
 
 app = Flask(__name__)
+# Key used to sign the CSRF tokens. Set SECRET_KEY on a real server;
+# without it, a random key is created when the app starts.
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
+# Every POST form must send a valid csrf_token, otherwise Flask returns 400
+csrf = CSRFProtect(app)
 
 
 @app.route("/")

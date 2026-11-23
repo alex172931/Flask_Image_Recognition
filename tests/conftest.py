@@ -11,6 +11,8 @@ from app import app as flask_app
 def fixture_client():
     """Flask test client, so requests run without starting a real server."""
     flask_app.config["TESTING"] = True
+    # The route tests check the app logic; CSRF itself is tested in test_csrf.py
+    flask_app.config["WTF_CSRF_ENABLED"] = False
     with flask_app.test_client() as test_client:
         yield test_client
 
