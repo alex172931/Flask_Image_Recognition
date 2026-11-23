@@ -76,3 +76,11 @@ pytest -v
 ```
 
 The same checks run on GitHub Actions on every push and pull request to `main` (see `.github/workflows/ci.yml`).
+The SonarQube Cloud analysis runs in `.github/workflows/sonarcloud.yml`.
+
+In CI, the packages come from `requirements-dev.lock`, which pins every version with a hash.
+If you change `requirements.txt` or `requirements-dev.txt`, update the lock file:
+
+```commandline
+uv pip compile requirements-dev.txt --generate-hashes --python-version 3.10 --python-platform x86_64-manylinux_2_28 --only-binary :all: -o requirements-dev.lock
+```
