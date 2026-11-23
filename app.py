@@ -1,4 +1,6 @@
 """Flask web app that predicts the digit shown in a hand sign image."""
+import os
+
 from flask import Flask, render_template, request
 
 from model import preprocess_img, predict_result
@@ -28,4 +30,5 @@ def predict_image_file():
 
 
 if __name__ == "__main__":
-    app.run(port=9000, debug=True)
+    # Debug mode only when FLASK_DEBUG=1 is set, never by default
+    app.run(port=9000, debug=os.environ.get("FLASK_DEBUG") == "1")
